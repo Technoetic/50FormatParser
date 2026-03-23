@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Format Parser - RAG 문서 파서</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title">50 Format Parser</h1>
+      <span id="format-count" class="format-counter"></span>
+    </div>
+    <div class="header-right">
+      <button id="btn-theme" class="btn btn-sm">라이트 모드</button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h2 class="sidebar-title">포맷 카테고리</h2>
+      <div id="sidebar-categories"></div>
+    </aside>
+
+    <main class="main-content">
+      <!-- Upload Section -->
+      <section id="upload-section">
+        <div id="drop-zone" class="drop-zone">
+          <div class="drop-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h2 class="drop-title">파일을 여기에 끌어놓거나 클릭하여 선택</h2>
+          <p class="drop-subtitle">50종 파일 포맷 지원 (PDF, DOCX, XLSX, CSV, HWP, EPUB, 오디오 등)</p>
+          <input type="file" id="file-input" class="hidden" accept="*/*">
+        </div>
+      </section>
+
+      <!-- Result Section -->
+      <section id="result-section" class="hidden">
+        <div class="result-header">
+          <button id="btn-back" class="btn btn-sm btn-outline">← 돌아가기</button>
+          <div class="file-info-row">
+            <span id="file-info"></span>
+            <span id="format-badge" class="format-badge"></span>
+          </div>
+          <div class="action-buttons">
+            <button id="btn-copy" class="btn btn-sm">텍스트 복사</button>
+            <button id="btn-download" class="btn btn-sm">다운로드</button>
+          </div>
+        </div>
+
+        <div id="progress-bar" class="progress-bar hidden">
+          <div class="progress-fill"></div>
+          <span class="progress-text">파싱 중...</span>
+        </div>
+
+        <div id="error-message" class="error-message hidden"></div>
+
+        <div class="result-tabs">
+          <button class="result-tab active" data-tab="text">텍스트</button>
+          <button class="result-tab" data-tab="metadata">메타데이터</button>
+          <button class="result-tab" data-tab="table">테이블</button>
+          <button class="result-tab" data-tab="raw">원본</button>
+        </div>
+
+        <div class="tab-panels">
+          <div id="tab-text" class="tab-content active"></div>
+          <div id="tab-metadata" class="tab-content"></div>
+          <div id="tab-table" class="tab-content"></div>
+          <div id="tab-raw" class="tab-content"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts: vendor libs, then LibLoader, then BaseParser, then parsers, then core, then app -->
+  <script src="js/vendor/rtf-parser.browser.js"></script>
+  <script src="js/vendor/avsc.browser.js"></script>
+  <script src="js/vendor/dbf-reader.browser.js"></script>
+  <script src="js/vendor/onenote-wasm-loader.js"></script>
+  <script src="js/vendor/msgreader.browser.js"></script>
+  <script src="js/vendor/unrar.browser.js"></script>
+  <script src="js/vendor/hwpjs.browser.js"></script>
+  <script src="js/vendor/mobi-parser.browser.js"></script>
+  <script src="js/LibLoader.js"></script>
+  <script src="js/parsers/BaseParser.js"></script>
+  <script src="js/parsers/TextParser.js"></script>
+  <script src="js/parsers/YamlParser.js"></script>
+  <script src="js/parsers/MarkdownParser.js"></script>
+  <script src="js/parsers/PdfParser.js"></script>
+  <script src="js/parsers/DocxParser.js"></script>
+  <script src="js/parsers/XlsxParser.js"></script>
+  <script src="js/parsers/PptxParser.js"></script>
+  <script src="js/parsers/ImageParser.js"></script>
+  <script src="js/parsers/AudioParser.js"></script>
+  <script src="js/parsers/VideoParser.js"></script>
+  <script src="js/parsers/SubtitleParser.js"></script>
+  <script src="js/parsers/ArchiveParser.js"></script>
+  <script src="js/parsers/EbookParser.js"></script>
+  <script src="js/parsers/EmailParser.js"></script>
+  <script src="js/parsers/DatabaseParser.js"></script>
+  <script src="js/parsers/HwpParser.js"></script>
+  <script src="js/parsers/OfficeParser.js"></script>
+  <script src="js/parsers/DomainParser.js"></script>
+  <script src="js/FormatRegistry.js"></script>
+  <script src="js/FileDetector.js"></script>
+  <script src="js/ParserManager.js"></script>
+  <script src="js/ResultRenderer.js"></script>
+  <script src="js/UIController.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
